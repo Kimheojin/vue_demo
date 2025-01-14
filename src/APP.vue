@@ -1,63 +1,46 @@
 <template>
-  <v-layout class="rounded rounded-md">
-    <v-app-bar title="냉장고 파먹기기"></v-app-bar>
+  <v-app id="inspire" theme="dark">
+    <v-app-bar flat>
+      <v-container class="mx-auto d-flex align-center justify-center">
+        <v-avatar class="me-4" color="grey-darken-1" size="32"></v-avatar>
 
-    <v-navigation-drawer>
-      <v-list>
-        <v-list-item
-          v-for="item in menuItems"
-          :key="item.title"
-          :to="item.path"
-          :title="item.title"
-        >
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+        <v-btn
+          v-for="link in links"
+          :key="link"
+          :text="link"
+          variant="text"
+        ></v-btn>
 
-    <v-main
-      class="d-flex align-center justify-center"
-      style="min-height: 300px"
-    >
-      <router-view></router-view>
+        <v-spacer></v-spacer>
+      </v-container>
+    </v-app-bar>
+
+    <v-main class="bg-grey-darken-4">
+      <v-container>
+        <v-row>
+          <v-col cols="2">
+            <v-sheet rounded="lg" class="bg-grey-darken-3">
+              <v-list rounded="lg" class="bg-grey-darken-3">
+                <v-list-item to="/login" title="Login" link></v-list-item>
+
+                <v-list-item title="냉장고 파먹기" link></v-list-item>
+
+                <v-list-item title="레시피 검색" link></v-list-item>
+              </v-list>
+            </v-sheet>
+          </v-col>
+
+          <v-col>
+            <v-sheet min-height="70vh" rounded="lg" class="bg-grey-darken-3">
+              <router-view></router-view>
+            </v-sheet>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
-  </v-layout>
+  </v-app>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const menuItems = ref([
-  //router.js에서 추가적인 설정 필요한듯
-  { title: "Home", path: "/" },
-  { title: "About", path: "/about" },
-  { title: "Login", path: "/Login" },
-  { title: "Dashboard", path: "/dashboard" },
-]);
+const links = ["Dashboard", "Messages", "Profile", "Updates"];
 </script>
-
-<style lang="scss">
-body {
-  overflow: hidden;
-  min-height: 100vh;
-  background: rgb(128, 128, 128);
-  background: linear-gradient(
-    0deg,
-    rgba(128, 128, 128, 0.9) 0%,
-    rgba(50, 50, 50, 1) 100%
-  );
-
-  @media (max-width: 600px) {
-    overflow: auto;
-  }
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 56px;
-}
-</style>
