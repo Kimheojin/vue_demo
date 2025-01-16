@@ -4,6 +4,7 @@ import * as directives from "vuetify/directives";
 
 export default createVuetify({
   // 다크모드
+  //https://vuetifyjs.com/en/features/theme/#javascript
   components,
   directives,
   theme: {

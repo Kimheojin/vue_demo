@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="login-container">
     <v-card
       class="mx-auto pa-12 pb-8"
       elevation="8"
       max-width="448"
       rounded="lg"
     >
+      <div class="text-h4 text-center mb-6">Login</div>
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
       <v-text-field
@@ -36,16 +37,32 @@
       </v-btn>
 
       <v-card-text class="text-center">
-        <a
-          class="text-blue text-decoration-none"
-          href="#"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
-        </a>
+        <router-link to="/signup" class="text-blue text-decoration-none">
+          회원가입 하러가기 <v-icon icon="mdi-chevron-right"></v-icon>
+        </router-link>
       </v-card-text>
     </v-card>
   </div>
 </template>
 <script></script>
+
+<style scoped>
+.login-container {
+  min-height: calc(100vh - 64px); /* 앱바 높이만큼 빼줌 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* 모바일 대응을 위한 패딩 */
+}
+
+.v-card {
+  width: 100%;
+  max-width: 448px;
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    padding: 16px;
+  }
+}
+</style>
