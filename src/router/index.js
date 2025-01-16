@@ -2,12 +2,17 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/login", //로그인 화면면
+    path: "/", //홈 화면
+    name: "Home",
+    component: () => import("../views/Home.vue"),
+  },
+  {
+    path: "/login", //로그인 화면
     name: "Login",
     component: () => import("../views/LoginView.vue"),
   },
   {
-    path: "/signup", //로그인 화면면
+    path: "/signup", //로그인 화면
     name: "SignUp",
     component: () => import("../views/SignUp.vue"),
   },

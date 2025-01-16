@@ -3,11 +3,34 @@
     <!-- 좌측 바 -->
     <v-navigation-drawer v-model="drawer">
       <v-list>
-        <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.path">
+        <!-- 좌측 상단 개인정보보 -->
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
+            subtitle="이메일 정보"
+            title="오대식"
+          >
+            <template v-slot:append>
+              <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
+            </template>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+        <!-- 메뉴바 -->
+
+        <v-list-item
+          v-for="(item, i) in menuItems"
+          :key="i"
+          :to="item.path"
+          color="primary"
+          variant="plain"
+        >
           <template v-slot:prepend>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon :icon="item.icon"></v-icon>
           </template>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+
+          <v-list-item-title v-text="item.title"></v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
