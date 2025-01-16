@@ -1,28 +1,7 @@
 :root {
-  --primary-color: #f6efef;
-  --hover-color: #616161;
-  --background-color: #ece7e7;
-  --text-color: #ffffff;
-}
-
-body {
-  font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  margin: 0;
-  min-height: 100vh;
-}
-
-a {
-  color: var(--text-color);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--hover-color);
-}
-
-#app {
-  width: 100%;
-  margin: 0 auto;
+  --primary-color: #2c2c2c; /* 진한 회색 (navigation drawer, app bar 용) */
+  --hover-color: #4a4a4a; /* 밝은 회색 (호버 효과용) */
+  --background-color: #121212; /* 어두운 검정색 (배경) */
+  --text-color: #ffffff; /* 흰색 (텍스트) */
+  --secondary-color: #333333; /* 중간 회색 (보조 요소용) */
 }

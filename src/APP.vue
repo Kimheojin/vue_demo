@@ -1,46 +1,39 @@
 <template>
-  <v-app id="inspire" theme="dark">
-    <v-app-bar flat>
-      <v-container class="mx-auto d-flex align-center justify-center">
-        <v-avatar class="me-4" color="grey-darken-1" size="32"></v-avatar>
-
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          :text="link"
-          variant="text"
-        ></v-btn>
-
-        <v-spacer></v-spacer>
-      </v-container>
+  <v-app>
+    <!-- 좌측 바 -->
+    <v-navigation-drawer v-model="drawer">
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in menuItems"
+          :key="i"
+          :to="item.path"
+          link
+        >
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <!-- 상단 바 -->
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-title>냉장고 파먹기</v-app-bar-title>
     </v-app-bar>
-
-    <v-main class="bg-grey-darken-4">
-      <v-container>
-        <v-row>
-          <v-col cols="2">
-            <v-sheet rounded="lg" class="bg-grey-darken-3">
-              <v-list rounded="lg" class="bg-grey-darken-3">
-                <v-list-item to="/login" title="Login" link></v-list-item>
-
-                <v-list-item title="냉장고 파먹기" link></v-list-item>
-
-                <v-list-item title="레시피 검색" link></v-list-item>
-              </v-list>
-            </v-sheet>
-          </v-col>
-
-          <v-col>
-            <v-sheet min-height="70vh" rounded="lg" class="bg-grey-darken-3">
-              <router-view></router-view>
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
+    <!-- router -->
+    <v-main>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script setup>
-const links = ["Dashboard", "Messages", "Profile", "Updates"];
+import { ref } from "vue";
+
+const drawer = ref(null);
+const menuItems = ref([
+  { title: "Home", path: "/" },
+  { title: "Login", path: "/Login" },
+  { title: "Contact", path: "/contact" },
+]);
 </script>

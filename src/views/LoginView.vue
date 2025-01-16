@@ -48,10 +48,4 @@
     </v-card>
   </div>
 </template>
-<script>
-export default {
-  data: () => ({
-    visible: false,
-  }),
-};
-</script>
+<script></script>
