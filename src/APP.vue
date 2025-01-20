@@ -33,6 +33,18 @@
           <v-list-item-title v-text="item.title"></v-list-item-title>
         </v-list-item>
       </v-list>
+
+      <!-- 로그아웃 버튼 -->
+      <template v-slot:append>
+        <v-list>
+          <v-list-item color="error" variant="plain">
+            <template v-slot:prepend>
+              <v-icon icon="mdi-logout"></v-icon>
+            </template>
+            <v-list-item-title>로그아웃</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </template>
     </v-navigation-drawer>
 
     <!-- 상단 바 -->

@@ -12,7 +12,7 @@ const routes = [
     component: () => import("../views/LoginView.vue"),
   },
   {
-    path: "/signup", //로그인 화면
+    path: "/signup", //회원가입 화면
     name: "SignUp",
     component: () => import("../views/SignUp.vue"),
   },
