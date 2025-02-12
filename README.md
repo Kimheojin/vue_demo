@@ -13,6 +13,7 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 - vueRouter
 - pinia
 - sass
+- npm install pinia-plugin-persistedstate
 
 # vue_demo
 

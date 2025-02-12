@@ -10,6 +10,7 @@
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
       <v-text-field
+        v-model="email"
         density="compact"
         placeholder="Email address"
         prepend-inner-icon="mdi-email-outline"
@@ -23,6 +24,7 @@
       </div>
 
       <v-text-field
+        v-model="password"
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
@@ -32,7 +34,15 @@
         @click:append-inner="visible = !visible"
       ></v-text-field>
 
-      <v-btn class="mb-8" color="blue" size="large" variant="tonal" block>
+      <v-btn
+        class="mb-8"
+        color="blue"
+        size="large"
+        variant="tonal"
+        block
+        @click="handleLogin"
+        :loading="loading"
+      >
         Log In
       </v-btn>
 
@@ -44,15 +54,62 @@
     </v-card>
   </div>
 </template>
-<script></script>
 
+<script>
+import axios from "axios";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
+
+export default {
+  setup() {
+    const router = useRouter();
+    const authStore = useAuthStore();
+
+    const email = ref("");
+    const password = ref("");
+    const visible = ref(false);
+    const loading = ref(false);
+
+    const handleLogin = async () => {
+      try {
+        loading.value = true;
+        const response = await axios.post("http://localhost:8080/api/login", {
+          email: email.value,
+          password: password.value,
+        });
+
+        const token = response.headers.authorization;
+        if (token) {
+          authStore.setToken(token);
+          alert("로그인에 성공했습니다!"); // 성공 알림 추가
+          router.push("/");
+        }
+      } catch (error) {
+        console.error("Login failed:", error);
+        alert("로그인에 실패했습니다.");
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    return {
+      email,
+      password,
+      visible,
+      loading,
+      handleLogin,
+    };
+  },
+};
+</script>
 <style scoped>
 .login-container {
-  min-height: calc(100vh - 64px); /* 앱바 높이만큼 빼줌 */
+  min-height: calc(100vh - 64px);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* 모바일 대응을 위한 패딩 */
+  padding: 20px;
 }
 
 .v-card {
