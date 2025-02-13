@@ -1,9 +1,13 @@
 <template>
   <v-list>
     <v-list-item
-      prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
-      :subtitle="user.email"
-      :title="user.membername"
+      :prepend-avatar="
+        user.email
+          ? 'https://cdn.vuetifyjs.com/images/profiles/marcus.jpg'
+          : 'https://cdn.vuetifyjs.com/images/profiles/no-profile.jpg'
+      "
+      :subtitle="user.email || '비로그인 상태입니다'"
+      :title="user.membername || '게스트'"
     >
       <template v-slot:append>
         <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
