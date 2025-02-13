@@ -4,21 +4,10 @@
     <v-navigation-drawer v-model="drawer">
       <v-list>
         <!-- 좌측 상단 개인정보보 -->
-        <v-list>
-          <v-list-item
-            prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
-            subtitle="이메일 정보"
-            title="오대식"
-          >
-            <template v-slot:append>
-              <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
-            </template>
-          </v-list-item>
-        </v-list>
+        <UserProfile />
 
         <v-divider></v-divider>
         <!-- 메뉴바 -->
-
         <v-list-item
           v-for="(item, i) in menuItems"
           :key="i"
@@ -36,14 +25,7 @@
 
       <!-- 로그아웃 버튼 -->
       <template v-slot:append>
-        <v-list>
-          <v-list-item color="error" variant="plain">
-            <template v-slot:prepend>
-              <v-icon icon="mdi-logout"></v-icon>
-            </template>
-            <v-list-item-title>로그아웃</v-list-item-title>
-          </v-list-item>
-        </v-list>
+        <LogoutButton />
       </template>
     </v-navigation-drawer>
 
@@ -62,6 +44,8 @@
 
 <script setup>
 import { ref } from "vue";
+import UserProfile from "./components/UserProfile.vue";
+import LogoutButton from "./components/LogoutButton.vue";
 
 const drawer = ref(null);
 const menuItems = ref([

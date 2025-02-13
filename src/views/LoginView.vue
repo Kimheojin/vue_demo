@@ -54,7 +54,6 @@
     </v-card>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import { ref } from "vue";
@@ -71,6 +70,24 @@ export default {
     const visible = ref(false);
     const loading = ref(false);
 
+    // fetchUserInfo를 먼저 정의
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/member", {
+          headers: {
+            Authorization: `Bearer ${authStore.token}`,
+          },
+        });
+
+        // 서버로부터 받은 사용자 정보를 store에 저장
+        console.log("Fetched user info:", response.data);
+        authStore.setUserInfo(response.data);
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      }
+    };
+
+    // 그 다음 handleLogin 정의
     const handleLogin = async () => {
       try {
         loading.value = true;
@@ -79,11 +96,14 @@ export default {
           password: password.value,
         });
 
-        const token = response.headers.authorization;
+        // response.headers.authorization 대신 response.data.token 사용
+        const token = response.data.token;
         if (token) {
           authStore.setToken(token);
-          alert("로그인에 성공했습니다!"); // 성공 알림 추가
-          router.push("/");
+          await fetchUserInfo();
+
+          alert("로그인에 성공했습니다!");
+          router.push("/Home");
         }
       } catch (error) {
         console.error("Login failed:", error);
